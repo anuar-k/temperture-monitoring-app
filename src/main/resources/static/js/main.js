@@ -10,7 +10,7 @@ const initConnect = () => {
 }
 
 const onConnected = () => {
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe('/topic/public', onWeatherReceived);
 }
 
 const onError = () => {
@@ -20,23 +20,23 @@ const onError = () => {
 }
 
 // имулируем действия отправки данных датчика на сервер
-function sendMessage() {
+function sendWeatherData() {
     const temp = ['-24', '-1', '-10', '+12', '+2', '+1', '-5', '-20']
     const status = ['card-snow', 'card-rain', 'card-storm', 'card-sunny']
     setInterval(() => {
         if (stompClient) {
-            const chatMessage = {
+            const weatherData = {
                 id: 1,
                 temperature: temp[Math.floor(Math.random() * temp.length)],
                 status: status[Math.floor(Math.random() * status.length)],
                 city: 'Астана'
             }
-            stompClient.send("/app/send.weather", {}, JSON.stringify(chatMessage));
+            stompClient.send("/app/send.weather", {}, JSON.stringify(weatherData));
         }
     }, 3000)
 }
 
-function onMessageReceived(payload) {
+function onWeatherReceived(payload) {
     const message = JSON.parse(payload.body);
     console.log(message)
     document.querySelector('.card').classList = `card ${message.status}`;
@@ -45,4 +45,4 @@ function onMessageReceived(payload) {
 }
 
 initConnect()
-sendMessage()
+sendWeatherData()
