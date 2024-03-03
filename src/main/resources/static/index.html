@@ -2,11 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Weather monitoring</title>
+    <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-<div id="city"></div>
-<div id="temperature"></div>
+<div class="connecting" hidden></div>
+<header>
+    <h1>Погода</h1>
+</header>
+<ul class="grid-container">
+    <li class="grid-item">
+        <div class="card card-night">
+            <div class="night"></div>
+        </div>
+        <div class="status">
+            <p id="temperature"></p>
+            <p id="city"></p>
+        </div>
+    </li>
+</ul>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>

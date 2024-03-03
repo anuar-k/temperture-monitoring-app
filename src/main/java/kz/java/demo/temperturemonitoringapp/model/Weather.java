@@ -12,7 +12,9 @@ public class Weather {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private float temperature;
+    private int temperature;
 
     private String city;
+
+    private String status;
 }
